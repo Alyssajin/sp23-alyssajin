@@ -22,9 +22,11 @@ public class AoAGame {
         System.out.println();
 
         // set up the the chooser and start the game
-        Chooser chooser = new RandomChooser(wordLength, DICTIONARY_FILE);
-        Guesser guesser = new ConsoleGuesser(console);
-        //Guesser guesser = new PAGALetterFreqGuesser(DICTIONARY_FILE);
+//        Chooser chooser = new RandomChooser(wordLength, DICTIONARY_FILE);
+        Chooser chooser = new RandomChooser(wordLength, "data/sorted_scrabble.txt");
+//        Guesser guesser = new ConsoleGuesser(console);
+//        Guesser guesser = new PAGALetterFreqGuesser(DICTIONARY_FILE);
+        Guesser guesser = new PAGALetterFreqGuesser("data/sorted_scrabble.txt");
         playGame(chooser, guesser, maxGuesses);
         showResults(chooser);
     }
