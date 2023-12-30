@@ -90,7 +90,6 @@ public class LinkedListDeque<T> implements Deque<T> {
         lld.addFirst(6);
         lld.addFirst(25);
         lld.addLast(7);
-
         System.out.println(lld.toList());
     }
 }

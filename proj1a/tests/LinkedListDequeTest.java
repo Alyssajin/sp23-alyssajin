@@ -71,4 +71,175 @@ public class LinkedListDequeTest {
      }
 
 //     Below, you'll write your own tests for LinkedListDeque.
+    @Test
+    /** This test whether an empty deque has been constructed successfully and if the size of the deque is correct. */
+    public void isEmptyAndSizeTest() {
+        /* Test 1: When the object type is integer, we test if the deque is empty and size is 0 by simply initialising it. */
+        Deque<Integer> lld1 = new LinkedListDeque<>(); // []
+        assertWithMessage("This deque should be empty").that(lld1.isEmpty()).isEqualTo(true);
+        assertWithMessage("This deque size should be 0.").that(lld1.size()).isEqualTo(0);
+
+        /* Test 2: When the object type is string, we test if the deque is empty and size is 0 by simply initialising it. */
+        Deque<String> lld2 = new LinkedListDeque<>(); // []
+        assertWithMessage("This deque should be empty").that(lld2.isEmpty()).isEqualTo(true);
+        assertWithMessage("This deque size should be 0.").that(lld2.size()).isEqualTo(0);
+
+        /* Test 3: We pass one item in integer type to see if isEmpty returns false and size is 1. */
+        Deque<Integer> lld3 = new LinkedListDeque<>(); // []
+        lld3.addLast(25);  // [25]
+        assertWithMessage("This deque should not be empty").that(lld3.isEmpty()).isEqualTo(false);
+        assertWithMessage("This deque size should be 1.").that(lld3.size()).isEqualTo(1);
+
+        /* Test 4: We pass one item in string type to see if isEmpty returns false and size is 1. */
+        Deque<String> lld4 = new LinkedListDeque<>(); // []
+        lld4.addFirst("Alyssa"); // ["Alyssa"]
+        assertWithMessage("This deque should not be empty").that(lld4.isEmpty()).isEqualTo(false);
+        assertWithMessage("This deque size should be 1.").that(lld4.size()).isEqualTo(1);
+
+        /* Test 5: We pass multiple item in integer type to see if isEmpty returns false and size is 4 . */
+        lld3.addLast(7); // [25, 7]
+        lld3.addFirst(94); // [25, 7, 94]
+        lld3.addFirst(93); // [25, 7, 94, 93]
+        assertWithMessage("This deque should not be empty").that(lld3.isEmpty()).isEqualTo(false);
+        assertWithMessage("This deque size should be 4.").that(lld3.size()).isEqualTo(4);
+
+        /* Test 6: We pass multiple item in string type to see if isEmpty returns false and size is 3. */
+        lld4.addFirst("Yoongi"); // ["Alyssa", "Yoongi"]
+        lld4.addFirst("Happy"); // ["Alyssa", "Yoongi", "Happy"]
+        assertWithMessage("This deque should not be empty").that(lld4.isEmpty()).isEqualTo(false);
+        assertWithMessage("This deque size should be 3.").that(lld4.size()).isEqualTo(3);
+    }
+
+    @Test
+    /** This test checks the function of get(). If a correct item is returned by using get(int i) function. */
+    public void getTest() {
+        /* Test 1: Initialise an empty deque and let it return the 1st item. */
+        Deque<Integer> lld1 = new LinkedListDeque<>(); // []
+        assertWithMessage("This deque should return null.").that(lld1.get(0)).isNull();
+
+        /* Test 2: Passes an integer to the deque and let it return the 1st item. */
+        lld1.addFirst(3); // [3]
+        assertWithMessage("This deque should return 3.").that(lld1.get(0)).isEqualTo(3);
+
+        /* Test 3: Passes multiple integers to the deque and let it return the 2nd item. */
+        lld1.addFirst(9); // [3, 9]
+        lld1.addFirst(93); // [3, 9, 93]
+        lld1.addLast(31); // [3, 9, 93, 31]
+        assertWithMessage("This deque should return 9.").that(lld1.get(1)).isEqualTo(9);
+
+        /* Test 4: let the deque return the 50th item and it should return null. */
+        assertWithMessage("This deque should return null.").that(lld1.get(49)).isNull();
+
+        /* Test 5: Initialise an empty string type deque and let it return the 7st item. */
+        Deque<String> lld2 = new LinkedListDeque<>(); // []
+        assertWithMessage("This deque should return null.").that(lld2.get(6)).isNull();
+
+        /* Test 6: Passes a string to the deque and let it return the 1st item. */
+        lld2.addFirst("Alyssa"); // ["Alyssa"]
+        assertWithMessage("This deque should return Alyssa.").that(lld2.get(0)).isEqualTo("Alyssa");
+
+        /* Test 7: Passes multiple strings to the deque and let it return the 3rd item. */
+        lld2.addFirst("Yoongi"); // ["Alyssa", "Yoongi"]
+        lld2.addFirst("Confidence"); // ["Alyssa", "Yoongi", "Confidence"]
+        lld2.addLast("Calm"); // ["Alyssa", "Yoongi", "Confidence", "Calm"]
+        assertWithMessage("This deque should return 9.").that(lld2.get(2)).isEqualTo("Confidence");
+
+        /* Test 8: let the deque return the 75th item and it should return null. */
+        assertWithMessage("This deque should return null.").that(lld2.get(74)).isNull();
+
+        /* Test 9: let the deque return the -75th item and it should return null. */
+        assertWithMessage("This deque should return null.").that(lld2.get(-74)).isNull();
+    }
+
+    @Test
+    /** In this test, we check if this function can return the correct item by passing the parameter - index. */
+    public void getRecursiveTest() {
+        /* Test 1: Initialise an empty deque and let it return the 1st item. */
+        Deque<Integer> lld1 = new LinkedListDeque<>(); // []
+        assertWithMessage("This deque should return null.").that(lld1.get(0)).isNull();
+
+        /* Test 2: Passes an integer to the deque and let it return the 1st item. */
+        lld1.addFirst(3); // [3]
+        assertWithMessage("This deque should return 3.").that(lld1.get(0)).isEqualTo(3);
+
+        /* Test 3: Passes multiple integers to the deque and let it return the 2nd item. */
+        lld1.addFirst(9); // [3, 9]
+        lld1.addFirst(93); // [3, 9, 93]
+        lld1.addLast(31); // [3, 9, 93, 31]
+        assertWithMessage("This deque should return 9.").that(lld1.get(1)).isEqualTo(9);
+
+        /* Test 4: let the deque return the 50th item and it should return null. */
+        assertWithMessage("This deque should return null.").that(lld1.get(49)).isNull();
+
+        /* Test 5: Initialise an empty string type deque and let it return the 7st item. */
+        Deque<String> lld2 = new LinkedListDeque<>(); // []
+        assertWithMessage("This deque should return null.").that(lld2.get(6)).isNull();
+
+        /* Test 6: Passes a string to the deque and let it return the 1st item. */
+        lld2.addFirst("Alyssa"); // ["Alyssa"]
+        assertWithMessage("This deque should return Alyssa.").that(lld2.get(0)).isEqualTo("Alyssa");
+
+        /* Test 7: Passes multiple strings to the deque and let it return the 3rd item. */
+        lld2.addFirst("Yoongi"); // ["Alyssa", "Yoongi"]
+        lld2.addFirst("Confidence"); // ["Alyssa", "Yoongi", "Confidence"]
+        lld2.addLast("Calm"); // ["Alyssa", "Yoongi", "Confidence", "Calm"]
+        assertWithMessage("This deque should return 9.").that(lld2.get(2)).isEqualTo("Confidence");
+
+        /* Test 8: let the deque return the 75th item and it should return null. */
+        assertWithMessage("This deque should return null.").that(lld2.get(74)).isNull();
+
+        /* Test 9: let the deque return the -75th item and it should return null. */
+        assertWithMessage("This deque should return null.").that(lld2.get(-74)).isNull();
+    }
+
+    @Test
+    /** In this test, we remove the first or last item to see if this function works well. */
+    public void removeFirstAndRemoveLast() {
+        Deque<Integer>lld1 = new LinkedListDeque<>(); // []
+        /* Test 1: Remove the first item in an empty deque. The removeFirst function should return null. */
+        lld1.removeFirst();
+        assertWithMessage("This deque should be null.").that(lld1.toList()).isNull();
+
+        /* Test 2: Remove the last item in an empty deque. The removeFirst function should return null. */
+        lld1.removeLast();
+        assertWithMessage("This deque should be null.").that(lld1.toList()).isNull();
+
+        /* Test 3: Pass multiple integers and remove First. */
+        lld1.addFirst(7);
+        lld1.addLast(25);
+        lld1.addLast(3);
+        lld1.addLast(9);
+        lld1.addLast(77);
+        lld1.addFirst(88);
+        lld1.removeFirst();
+        assertWithMessage("removeFirst function failed to remove the first item in the deque").
+                that(lld1.toList()).containsExactly( 7, 25, 3, 9, 77).inOrder();
+
+        /* Test 4: Remove the last item. */
+        lld1.removeLast();
+        assertWithMessage("removeLast function failed to remove the last item in the deque").
+                that(lld1.toList()).containsExactly(7, 25, 3, 9);
+
+        /* Test 5: Remove the last item three times. */
+        lld1.removeLast();
+        lld1.removeLast();
+        lld1.removeLast();
+        assertWithMessage("removeLast function failed to remove the last item in the deque").
+                that(lld1.toList()).containsExactly(7);
+
+        /* Test 6: Remove the first item three times. Keep remove items although the deque is already null. */
+        lld1.removeFirst();
+        lld1.removeFirst();
+        lld1.removeFirst();
+        assertWithMessage("removeFirst function failed to remove the first item in the deque").
+                that(lld1.toList()).isNull();
+
+        /* Test 7: Add two items and remove the first item. */
+        lld1.addLast(23);
+        lld1.addFirst(33);
+        lld1.removeLast();
+        assertWithMessage("removeLast function failed to remove the last item in the deque").
+                that(lld1.toList()).containsExactly(33);
+
+    }
 }
