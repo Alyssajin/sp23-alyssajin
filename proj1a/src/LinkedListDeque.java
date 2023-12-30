@@ -28,6 +28,17 @@ public class LinkedListDeque<T> implements Deque<T> {
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
     }
+
+    /** Helper function for getRecursive(). Returns the ith Node. */
+    public Node getNodeRecursive(int index) {
+        Node p;
+        if (index == 0) {
+            p = sentinel.next;
+            return p;
+        }
+        p = getNodeRecursive(index - 1).next;
+        return p;
+    }
     @Override
     public void addFirst(T x) {
         size += 1;
@@ -57,6 +68,9 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public boolean isEmpty() {
+        if (sentinel.next == sentinel) {
+            return true;
+        }
         return false;
     }
 
@@ -67,22 +81,45 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T removeFirst() {
-        return null;
+        if (isEmpty()) {
+            return null;
+        }
+        T removedItem = sentinel.next.item;
+        sentinel.next = sentinel.next.next;
+        sentinel.next.prev = sentinel;
+        return removedItem;
     }
 
     @Override
     public T removeLast() {
-        return null;
+        if (isEmpty()) {
+            return null;
+        }
+        T removedItem = sentinel.prev.item;
+        sentinel.prev = sentinel.prev.prev;
+        sentinel.prev.next = sentinel;
+        return removedItem;
     }
 
     @Override
     public T get(int index) {
-        return null;
+        Node p = sentinel.next;
+        if (index >= size || index < 0) {
+            return null;
+        }
+        for (int i = 0; i < index; i ++) {
+            p = p.next;
+        }
+        return p.item;
     }
 
     @Override
     public T getRecursive(int index) {
-        return null;
+        if (index >= size || index < 0) {
+            return null;
+        }
+        Node p = getNodeRecursive(index);
+        return p.item;
     }
 
     public static void main(String[] args) {
@@ -90,6 +127,7 @@ public class LinkedListDeque<T> implements Deque<T> {
         lld.addFirst(6);
         lld.addFirst(25);
         lld.addLast(7);
+        lld.getRecursive(2);
         System.out.println(lld.toList());
     }
 }
