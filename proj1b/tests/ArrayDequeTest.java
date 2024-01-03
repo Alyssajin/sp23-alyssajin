@@ -244,10 +244,10 @@ public class ArrayDequeTest {
             ad.removeLast(); // [93, 88, 7, 25, 3, 9, null, null, null, null, null, null, null, null, null, null]
             ad.removeLast(); // [93, 88, 7, 25, 3, null, null, null, null, null, null, null, null, null, null, null]
             ad.removeFirst(); // [null, 88, 7, 25, 3, null, null, null, null, null, null, null, null, null, null, null]
-            ad.removeFirst(); // [null, null, 7, 25, 3, null, null, null, null, null, null, null, null, null, null, null]
-            ad.removeFirst(); // [null, null, null, 25, 3, null, null, null, null, null, null, null, null, null, null, null]
-            ad.removeLast(); // [null, null, null, 25, null, null, null, null, null, null, null, null, null, null, null, null]
-            ad.removeLast(); // [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+            ad.removeFirst(); // [7, 25, 3, null, null, null, null, null]
+            ad.removeFirst(); // [25, 3, null, null, null, null, null, null]
+            ad.removeLast(); // [25, null, null, null, null, null, null, null]
+            ad.removeLast(); // [null, null, null, null, null, null, null, null]
             assertWithMessage("removeFirst function failed to remove the first item in the deque").
                     that(ad.isEmpty()).isEqualTo(true);
         }
@@ -272,14 +272,14 @@ public class ArrayDequeTest {
             ad.removeLast(); // [93, 88, 7, 25, 3, 9, null, null, null, null, null, null, null, null, null, null]
             ad.removeLast(); // [93, 88, 7, 25, 3, null, null, null, null, null, null, null, null, null, null, null]
             ad.removeFirst(); // [null, 88, 7, 25, 3, null, null, null, null, null, null, null, null, null, null, null]
-            ad.removeFirst(); // [null, null, 7, 25, 3, null, null, null, null, null, null, null, null, null, null, null]
-            ad.removeFirst(); // [null, null, null, 25, 3, null, null, null, null, null, null, null, null, null, null, null]
-            ad.removeLast(); // [null, null, null, 25, null, null, null, null, null, null, null, null, null, null, null, null]
-            ad.removeLast(); // [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
-            ad.addFirst(27); // [27, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
-            ad.addLast(33); // [27, 33, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+            ad.removeFirst(); // [7, 25, 3, null, null, null, null, null]
+            ad.removeFirst(); // [25, 3, null, null, null, null, null, null]
+            ad.removeLast(); // [25, null, null, null, null, null, null, null]
+            ad.removeLast(); // [null, null, null, null, null, null, null, null]
+            ad.addFirst(27); // [27, null, null, null, null, null, null, null]
+            ad.addLast(33); // [27, 33, null, null, null, null, null, null]
             assertWithMessage("removeLast function failed to remove the last item in the deque").
-                    that(ad.toList()).containsExactly(27, 33, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+                    that(ad.toList()).containsExactly(27, 33, null, null, null, null, null, null);
         }
     }
 }
