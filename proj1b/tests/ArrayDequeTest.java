@@ -126,7 +126,7 @@ public class ArrayDequeTest {
         ad.addFirst("Yoongi"); // ["Alyssa", null, null, null, null, null, null, "Yoongi"]
         ad.addFirst("Confidence"); // ["Alyssa", null, null, null, null, null, "Confidence", "Yoongi"]
         ad.addLast("Calm"); // ["Alyssa", "Calm", null, null, null, null, "Confidence", "Yoongi"]
-        assertWithMessage("Test 7: This deque should return 9.").that(ad.get(2)).isEqualTo("null");
+        assertWithMessage("Test 7: This deque should return null.").that(ad.get(2)).isEqualTo(null);
         assertWithMessage("Test 7: This deque should return Calm").that(ad.get(1)).isEqualTo("Calm");
     }
 
