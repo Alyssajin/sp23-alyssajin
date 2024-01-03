@@ -18,8 +18,8 @@ public class ArrayDeque<T> implements Deque<T> {
         /* Initialise the nextFirst index && the nextLast index. */
         items = (T[]) new Object[8];
         size = 0;
-        nextFirst = 2;
-        nextLast = 3;
+        nextFirst = 0;
+        nextLast = 1;
     }
 
     /** Check if the arrayDeque is full. */
@@ -92,7 +92,10 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T get(int index) {
-        return null;
+        if (index < 0 || index >= items.length) {
+            return null;
+        }
+        return items[index];
     }
 
     public static void main(String[] args) {
