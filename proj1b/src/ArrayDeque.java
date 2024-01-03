@@ -152,19 +152,4 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         return items[index];
     }
-
-    public static void main(String[] args) {
-        Deque<Integer> ad = new ArrayDeque<>();
-        ad.addFirst(7);
-        ad.addFirst(25);
-        ad.addFirst(19);
-        ad.addLast(94);
-        ad.addLast(3);
-        ad.addLast(9);
-        ad.addFirst(93);
-        ad.addFirst(6);
-        ad.addFirst(2);
-        ad.addLast(1);
-    }
-
 }
