@@ -32,8 +32,13 @@ public class ArrayDeque<T> implements Deque<T> {
         /* Only resizeUp when the list is full. */
         if (isFull()) {
             T[] copiedItemsList = (T[]) new Object[items.length + 8];
+            int start = nextFirst;
             for (int i = 0; i < items.length; i ++) {
-                copiedItemsList[i] = items[i];
+                if (start + 1 == items.length) {
+                    start = -1;
+                }
+                copiedItemsList[i] = items[start + 1];
+                start ++;
             }
             nextFirst = copiedItemsList.length - 1;
             nextLast = items.length;
