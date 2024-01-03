@@ -33,47 +33,8 @@ public class ArrayDeque<T> implements Deque<T> {
             for (int i = 0; i < items.length; i ++) {
                 copiedItemsList[i] = items[i];
             }
-                /* if items.length = 8, nextFirst = 7, nextLast = 0:
-                nextFirst = the last index of the new item list.
-                nextLast = 0. */
-            if (nextFirst == items.length - 1 && nextLast == 0) {
-                nextFirst = items.length - 1;
-                /* if nextLast = 0, copy from the start index till the end of the list.
-                nextFirst = nextFirst
-                nextLast = the last index + 1 of the original item list. */
-            } else if (nextLast == 0) {
-                for (int i = nextFirst + 1; i < items.length; i++) {
-                    copiedItemsList[i] = items[i];
-                }
-                nextLast = items.length;
-                /* if nextFirst = items.length - 1, copy from the 0th item till the nextLast - 1 th item.
-                nextFirst = the last index of the new item list.
-                nextLast = nextLast. */
-            } else if (nextFirst == items.length - 1) {
-                for (int i = 0; i < nextLast - 1; i++) {
-                    copiedItemsList[i] = items[i];
-                }
-                nextFirst = copiedItemsList.length - 1;
-                /* if nextFirst is in front of nextLast, copy from the first till the last item.
-                nextFirst = nextFirst
-                nextLast = nextLast. */
-            } else if (nextFirst < nextLast) {
-                for (int i = nextFirst + 1; i <= nextLast - 1; i++) {
-                    copiedItemsList[i] = items[i];
-                }
-                /* if nextFirst is after nextLast, copy from the first item till the end of the list +
-                the 0th till the last item.
-                nextFirst = new last index - (last index - nextFirst)
-                nextLast = nextLast */
-            } else if (nextFirst > nextLast) {
-                for (int i = nextFirst + 1; i < size; i++) {
-                    copiedItemsList[i] = items[i];
-                }
-                for (int i = 0; i <= nextLast - 1; i++) {
-                    copiedItemsList[i] = items[i];
-                }
-                nextFirst = copiedItemsList.length - 1 - (items.length - 1 - nextFirst);
-            }
+            nextFirst = copiedItemsList.length - 1;
+            nextLast = items.length;
             items = copiedItemsList;
         }
     }
