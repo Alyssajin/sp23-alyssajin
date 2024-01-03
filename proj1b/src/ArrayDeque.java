@@ -27,21 +27,41 @@ public class ArrayDeque<T> implements Deque<T> {
         return size >= items.length;
     }
 
+    /** Copy the list. */
+    public T[] copyList(boolean isSizeUp) {
+        T[] copiedItemsList;
+        int start = nextFirst;
+
+        if (isSizeUp) {
+            copiedItemsList = (T[]) new Object[items.length + 8];
+        } else {
+            copiedItemsList = (T[]) new Object[items.length / 2];
+        }
+        for (int i = 0; i < size; i ++) {
+            if (start + 1 == items.length) {
+                start = -1;
+            }
+            copiedItemsList[i] = items[start + 1];
+            start ++;
+        }
+        nextFirst = copiedItemsList.length - 1;
+        nextLast = size;
+        return copiedItemsList;
+    }
+
     /** Increase the size of the item list if the size is full. */
     public void resizeUp() {
         /* Only resizeUp when the list is full. */
         if (isFull()) {
-            T[] copiedItemsList = (T[]) new Object[items.length + 8];
-            int start = nextFirst;
-            for (int i = 0; i < items.length; i ++) {
-                if (start + 1 == items.length) {
-                    start = -1;
-                }
-                copiedItemsList[i] = items[start + 1];
-                start ++;
-            }
-            nextFirst = copiedItemsList.length - 1;
-            nextLast = items.length;
+            T[] copiedItemsList = copyList(true);
+            items = copiedItemsList;
+        }
+    }
+
+    /** Decrease the size of the array when the usage factor is < 25%. Meanwhile, if the size <= 8, stop resize down.*/
+    public void resizeDown() {
+        if (size < items.length * 0.25 && items.length > 8) {
+            T[] copiedItemsList = copyList(false);
             items = copiedItemsList;
         }
     }
@@ -87,12 +107,42 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T removeFirst() {
-        return null;
+        resizeDown();
+        T removed;
+        if (size <= 0) {
+            removed = null;
+        } else if (nextFirst + 1 > items.length - 1) {
+            removed = items[0];
+            items[0] = null;
+            nextFirst = 0;
+            size --;
+        } else {
+            removed = items[nextFirst + 1];
+            items[nextFirst + 1] = null;
+            nextFirst ++;
+            size --;
+        }
+        return removed;
     }
 
     @Override
     public T removeLast() {
-        return null;
+        resizeDown();
+        T removed;
+        if (size <= 0) {
+            removed = null;
+        } else if (nextLast - 1 < 0) {
+            removed = items[items.length - 1];
+            items[items.length - 1] = null;
+            nextLast = items.length - 1;
+            size --;
+        } else {
+            removed = items[nextLast - 1];
+            items[nextLast - 1] = null;
+            nextLast --;
+            size --;
+        }
+        return removed;
     }
 
     @Override
