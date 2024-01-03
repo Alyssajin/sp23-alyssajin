@@ -1,4 +1,6 @@
 import java.nio.charset.IllegalCharsetNameException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ArrayDeque<T> implements Deque<T> {
@@ -38,6 +40,7 @@ public class ArrayDeque<T> implements Deque<T> {
             items = copiedItemsList;
         }
     }
+
     @Override
     public void addFirst(T x) {
         resizeUp();
@@ -64,7 +67,7 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public List<T> toList() {
-        return null;
+        return new ArrayList<>(Arrays.asList(items));
     }
 
     @Override
@@ -74,7 +77,7 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
