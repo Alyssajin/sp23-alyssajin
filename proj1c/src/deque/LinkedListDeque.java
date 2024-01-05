@@ -130,6 +130,23 @@ public class LinkedListDeque<T> implements Deque<T> {
         return new LinkedListDequeIterator();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if ( o instanceof LinkedListDeque otherList) {
+            if (this.size != otherList.size) {
+                return false;
+            }
+            for (T x: this) {
+                if (!otherList.toList().contains(x)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
     private class LinkedListDequeIterator implements Iterator<T> {
         Node wizPos;
         public LinkedListDequeIterator() {

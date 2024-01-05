@@ -165,6 +165,24 @@ public class ArrayDeque<T> implements Deque<T> {
         return new ArrayDequeIterator();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o instanceof ArrayDeque otherDeque) {
+            if (this.size != otherDeque.size) {
+                return false;
+            }
+            for (T x : this) {
+                if (!otherDeque.toList().contains(x)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     private class ArrayDequeIterator implements Iterator<T> {
         private int wizPos;
         public ArrayDequeIterator() {
