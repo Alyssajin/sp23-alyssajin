@@ -147,6 +147,17 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (T x : this) {
+            sb.append(x);
+            sb.append(" ");
+        }
+        return sb.toString();
+    }
+
     private class LinkedListDequeIterator implements Iterator<T> {
         Node wizPos;
         public LinkedListDequeIterator() {

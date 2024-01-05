@@ -183,6 +183,16 @@ public class ArrayDeque<T> implements Deque<T> {
         return true;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (T x : this) {
+            sb.append(x);
+            sb.append(" ");
+        }
+        return sb.toString();
+    }
+
     private class ArrayDequeIterator implements Iterator<T> {
         private int wizPos;
         public ArrayDequeIterator() {
@@ -214,5 +224,6 @@ public class ArrayDeque<T> implements Deque<T> {
         for (String s : ad) {
             System.out.println(s);
         }
+        System.out.println(ad);
     }
 }
